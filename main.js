@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       toggle.setAttribute('aria-expanded', String(!isOpen));
     });
 
-    // Close drawer when a link is tapped
+    // Close when a nav link is tapped
     drawer.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         toggle.classList.remove('open');
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Close drawer on outside tap
+    // Close on tap outside
     document.addEventListener('click', (e) => {
       if (!toggle.contains(e.target) && !drawer.contains(e.target)) {
         toggle.classList.remove('open');
