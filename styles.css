@@ -45,7 +45,7 @@ h1,
 /* ============================================================
    PAGE WRAPPER & BACKGROUND
    ============================================================ */
-/* page-wrapper defined above with nav */
+
 
 .bg-canvas {
   position: fixed;
@@ -67,7 +67,7 @@ h1,
    ============================================================ */
 nav {
   background: #2a6399;
-  position: fixed;
+  position: sticky;
   top: 0; left: 0; right: 0;
   z-index: 200;
   display: flex; align-items: center; justify-content: space-between;
@@ -76,11 +76,9 @@ nav {
   box-shadow: 0 4px 20px rgba(58,127,191,0.25);
 }
 
-/* push page content down so it doesn't hide behind fixed nav */
 .page-wrapper {
   position: relative;
   min-height: 100vh;
-  padding-top: 60px;
 }
 
 .nav-logo {
@@ -126,10 +124,10 @@ nav {
 /* Mobile nav drawer */
 .nav-drawer {
   display: none;
-  position: fixed;
+  position: absolute;
   top: 60px; left: 0; right: 0;
   background: #2a6399;
-  z-index: 198;
+  z-index: 199;
   padding: 1rem 1.5rem 1.5rem;
   box-shadow: 0 8px 24px rgba(0,0,0,0.25);
 }
