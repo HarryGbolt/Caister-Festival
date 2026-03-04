@@ -71,6 +71,9 @@ nav {
   top: 0;
   z-index: 200;
   box-shadow: 0 4px 20px rgba(58,127,191,0.3);
+  /* two rows on mobile: logo then links */
+  display: flex;
+  flex-direction: column;
 }
 
 .page-wrapper {
@@ -78,37 +81,37 @@ nav {
   min-height: 100vh;
 }
 
-.nav-top {
-  display: flex;
-  align-items: center;
-  padding: 0 1.2rem;
-  height: 48px;
-}
-
+/* Logo row */
 .nav-logo {
   font-family: 'Titan One', cursive;
-  font-size: 1.2rem; color: var(--white);
-  cursor: pointer; white-space: nowrap;
+  font-size: 1.1rem; color: var(--white);
+  text-decoration: none;
+  white-space: nowrap;
+  padding: .7rem 1.2rem .3rem;
+  display: block;
   text-shadow: 1px 2px 4px rgba(0,0,0,0.2);
 }
 
+/* Links row — horizontally scrollable */
 .nav-links {
   display: flex;
   list-style: none;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 0 .75rem .6rem;
-  gap: .3rem;
+  padding: 0 .6rem .55rem;
+  gap: .25rem;
+  width: 100%;
 }
 .nav-links::-webkit-scrollbar { display: none; }
+.nav-links li { flex-shrink: 0; }
 .nav-links li a {
   display: block;
   white-space: nowrap;
   color: rgba(255,255,255,0.85);
   text-decoration: none;
-  font-size: .8rem; font-weight: 700;
-  padding: .4rem .9rem;
+  font-size: .78rem; font-weight: 700;
+  padding: .38rem .85rem;
   border-radius: 20px;
   transition: background .2s, color .2s;
   letter-spacing: .03em;
@@ -513,24 +516,22 @@ footer {
   .panel { padding: 2.5rem 2rem; }
   .sec-wrap { padding: 3rem 2rem; }
 
-  /* Single row nav on desktop — logo left, links right */
+  /* Single row on desktop */
   nav {
-    display: flex;
     flex-direction: row;
     align-items: center;
     padding: 0 1.5rem;
     height: 60px;
   }
-  .nav-top {
-    height: auto;
-    padding: 0;
+  .nav-logo {
+    padding: 0 1rem 0 0;
     flex-shrink: 0;
-    margin-right: 1rem;
   }
   .nav-links {
     padding: 0;
-    flex-wrap: wrap;
     overflow-x: visible;
+    flex-wrap: wrap;
     gap: .1rem;
   }
+  .nav-links li { flex-shrink: initial; }
 }
