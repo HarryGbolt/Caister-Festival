@@ -315,6 +315,9 @@ nav {
 .notice-box p.small   { margin-bottom: 0; }
 .notice-box a         { color: var(--coral); font-weight: 700; text-decoration: none; }
 .notice-box a:hover   { text-decoration: underline; }
+/* buttons inside notice-box should keep their own colours */
+.notice-box .btn      { color: var(--white) !important; text-decoration: none; }
+.notice-box .btn:hover { text-decoration: none; }
 
 /* ============================================================
    SPONSOR TIERS
