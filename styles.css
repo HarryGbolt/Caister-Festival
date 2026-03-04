@@ -124,7 +124,7 @@ nav {
 /* Mobile nav drawer */
 .nav-drawer {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 60px; left: 0; right: 0;
   background: #2a6399;
   z-index: 199;
