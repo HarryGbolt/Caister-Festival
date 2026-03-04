@@ -21,7 +21,7 @@ body {
   background: var(--sand);
 }
 
-/* ===== FULL PAGE BACKGROUND ==== */
+/* ===== FULL PAGE BACKGROUND ===== */
 .page-wrapper {
   position: relative;
   min-height: 100vh;
