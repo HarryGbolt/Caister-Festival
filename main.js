@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const drawer = document.querySelector('.nav-drawer');
 
   if (toggle && drawer) {
-    toggle.addEventListener('click', () => {
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       const isOpen = drawer.classList.contains('open');
       toggle.classList.toggle('open', !isOpen);
       drawer.classList.toggle('open', !isOpen);
