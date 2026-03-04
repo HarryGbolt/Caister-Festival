@@ -69,15 +69,12 @@ h1,
    NAV
    ============================================================ */
 nav {
-  background: rgba(58,127,191,0.97);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: #2a6399;
   position: sticky; top: 0; z-index: 200;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 1.5rem;
   height: 60px;
   box-shadow: 0 4px 20px rgba(58,127,191,0.25);
-  /* prevent any gap above */
   margin-top: 0;
   width: 100%;
 }
@@ -131,6 +128,8 @@ nav {
   z-index: 198;
   padding: 1rem 1.5rem 1.5rem;
   box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  /* pull up by 1px to close any subpixel gap */
+  margin-top: -1px;
 }
 .nav-drawer.open {
   display: block;
