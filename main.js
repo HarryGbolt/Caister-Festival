@@ -48,10 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ----------------------------------------------------------
      4. ACTIVE NAV LINK — highlight current page
   ---------------------------------------------------------- */
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const pathname = window.location.pathname.replace(/\/$/, '') || '';
   document.querySelectorAll('.nav-links a, .nav-drawer a').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === currentPage) {
+    const href = link.getAttribute('href').replace(/\/$/, '') || '';
+    if (href === pathname || (href === '' && pathname === '')) {
       link.classList.add('active');
     }
   });
