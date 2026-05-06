@@ -89,29 +89,33 @@
   }
 
   /* ── Lightbox ── */
-  .lightbox {
+  .lightbox-backdrop {
     display: none;
     position: fixed;
     inset: 0;
     z-index: 1000;
     background: rgba(20,30,50,0.92);
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
     backdrop-filter: blur(6px);
+    cursor: pointer;
   }
-  .lightbox.open { display: flex; }
+  .lightbox-backdrop.open { display: block; }
   .lightbox-inner {
-    position: relative;
-    max-width: min(900px, 95vw);
-    max-height: 90vh;
-    display: flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    display: none;
     flex-direction: column;
     align-items: center;
+    max-width: min(900px, 95vw);
+    width: 100%;
+    cursor: default;
   }
+  .lightbox-inner.open { display: flex; }
   .lightbox-inner img {
     max-width: 100%;
-    max-height: 80vh;
+    max-height: 75vh;
     border-radius: 18px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.5);
     object-fit: contain;
@@ -314,17 +318,17 @@
     <a href="/contact/" class="btn btn-coral">Share Your Photos →</a>
   </div>
 
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
-    <div class="lightbox-inner">
-      <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-      <img id="lightboxImg" src="" alt="Festival photo"/>
-      <div class="lightbox-nav">
-        <button onclick="prevPhoto()">← Prev</button>
-        <button onclick="nextPhoto()">Next →</button>
-      </div>
-      <div class="lightbox-counter" id="lightboxCounter"></div>
+  <!-- Lightbox backdrop (click to close) -->
+  <div class="lightbox-backdrop" id="lightboxBackdrop" onclick="closeLightbox()"></div>
+  <!-- Lightbox inner (click does NOT close) -->
+  <div class="lightbox-inner" id="lightboxInner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightboxImg" src="" alt="Festival photo"/>
+    <div class="lightbox-nav">
+      <button onclick="prevPhoto()">← Prev</button>
+      <button onclick="nextPhoto()">Next →</button>
     </div>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
   </div>
 
   <footer>
@@ -357,12 +361,14 @@
   function openLightbox(index) {
     current = index;
     updateLightbox();
-    document.getElementById('lightbox').classList.add('open');
+    document.getElementById('lightboxBackdrop').classList.add('open');
+    document.getElementById('lightboxInner').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
   function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lightboxBackdrop').classList.remove('open');
+    document.getElementById('lightboxInner').classList.remove('open');
     document.body.style.overflow = '';
   }
 
@@ -380,7 +386,7 @@
 
   // Keyboard navigation
   document.addEventListener('keydown', function(e) {
-    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (!document.getElementById('lightboxBackdrop').classList.contains('open')) return;
     if (e.key === 'ArrowRight') nextPhoto();
     if (e.key === 'ArrowLeft') prevPhoto();
     if (e.key === 'Escape') closeLightbox();
