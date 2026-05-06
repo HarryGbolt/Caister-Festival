@@ -51,115 +51,17 @@
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 6px 24px rgba(58,127,191,0.13);
-    cursor: pointer;
-    position: relative;
     background: rgba(255,255,255,0.6);
     transition: transform .2s, box-shadow .2s;
   }
   .photo-item:hover {
-    transform: translateY(-4px) scale(1.01);
-    box-shadow: 0 14px 40px rgba(58,127,191,0.22);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(58,127,191,0.2);
   }
   .photo-item img {
     width: 100%;
     display: block;
     border-radius: 16px;
-    transition: filter .2s;
-  }
-  .photo-item:hover img { filter: brightness(1.04); }
-
-  /* Hover overlay */
-  .photo-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(58,127,191,0.55) 0%, transparent 60%);
-    border-radius: 16px;
-    opacity: 0;
-    transition: opacity .2s;
-    display: flex;
-    align-items: flex-end;
-    padding: 1rem;
-  }
-  .photo-item:hover .photo-overlay { opacity: 1; }
-  .photo-overlay span {
-    color: white;
-    font-weight: 700;
-    font-size: .8rem;
-    letter-spacing: .04em;
-  }
-
-  /* ── Lightbox ── */
-  .lightbox-backdrop {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    background: rgba(20,30,50,0.92);
-    backdrop-filter: blur(6px);
-    cursor: pointer;
-  }
-  .lightbox-backdrop.open { display: block; }
-  .lightbox-inner {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1001;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    max-width: min(900px, 95vw);
-    width: 100%;
-    cursor: default;
-  }
-  .lightbox-inner.open { display: flex; }
-  .lightbox-inner img {
-    max-width: 100%;
-    max-height: 75vh;
-    border-radius: 18px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    object-fit: contain;
-  }
-  .lightbox-close {
-    position: absolute;
-    top: -44px;
-    right: 0;
-    background: var(--coral);
-    border: none;
-    color: white;
-    font-size: 1.2rem;
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700;
-    transition: background .15s;
-  }
-  .lightbox-close:hover { background: #e05555; }
-  .lightbox-nav {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.1rem;
-  }
-  .lightbox-nav button {
-    background: rgba(255,255,255,0.15);
-    border: 2px solid rgba(255,255,255,0.3);
-    color: white;
-    padding: .5rem 1.4rem;
-    border-radius: 50px;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: .85rem;
-    transition: background .15s;
-  }
-  .lightbox-nav button:hover { background: rgba(255,255,255,0.25); }
-  .lightbox-counter {
-    color: rgba(255,255,255,0.6);
-    font-size: .8rem;
-    font-weight: 600;
-    margin-top: .6rem;
-    letter-spacing: .05em;
   }
 
   /* ── CTA panel ── */
@@ -250,65 +152,41 @@
   <!-- Photo Grid -->
   <div class="photo-grid" id="photoGrid">
 
-    <div class="photo-item" onclick="openLightbox(0)">
-      <img src="../images/gallery/473615908_122207614982064490_4061428188698849632_n.jpg" alt="Caister Festival" loading="lazy"/>
-      <div class="photo-overlay"><span>Caister Festival</span></div>
-    </div>
+    <div class="photo-item">
+      <img src="../images/gallery/473615908_122207614982064490_4061428188698849632_n.jpg" alt="Caister Festival" loading="lazy"/>    </div>
 
-    <div class="photo-item" onclick="openLightbox(1)">
-      <img src="../images/gallery/475755187_122210212646064490_6224620980363574261_n.jpg" alt="Caister Festival" loading="lazy"/>
-      <div class="photo-overlay"><span>Caister Festival</span></div>
-    </div>
+    <div class="photo-item">
+      <img src="../images/gallery/475755187_122210212646064490_6224620980363574261_n.jpg" alt="Caister Festival" loading="lazy"/>    </div>
 
-    <div class="photo-item" onclick="openLightbox(2)">
-      <img src="../images/gallery/475576319_122210223926064490_6567692477529459892_n.jpg" alt="Caister Festival" loading="lazy"/>
-      <div class="photo-overlay"><span>Caister Festival</span></div>
-    </div>
+    <div class="photo-item">
+      <img src="../images/gallery/475576319_122210223926064490_6567692477529459892_n.jpg" alt="Caister Festival" loading="lazy"/>    </div>
 
-    <div class="photo-item" onclick="openLightbox(3)">
-      <img src="../images/gallery/503838293_122233011230064490_4855710934002158258_n.jpg" alt="Caister Festival" loading="lazy"/>
-      <div class="photo-overlay"><span>Caister Festival</span></div>
-    </div>
+    <div class="photo-item">
+      <img src="../images/gallery/503838293_122233011230064490_4855710934002158258_n.jpg" alt="Caister Festival" loading="lazy"/>    </div>
 
-    <div class="photo-item" onclick="openLightbox(4)">
-      <img src="../images/gallery/505250895_122233615442064490_8747018229966735594_n.jpg" alt="Caister Festival" loading="lazy"/>
-      <div class="photo-overlay"><span>Caister Festival</span></div>
-    </div>
+    <div class="photo-item">
+      <img src="../images/gallery/505250895_122233615442064490_8747018229966735594_n.jpg" alt="Caister Festival" loading="lazy"/>    </div>
 
-    <div class="photo-item" onclick="openLightbox(5)">
-      <img src="../images/gallery/503504208_122233615526064490_4193752580131806327_n.jpg" alt="Caister Festival" loading="lazy"/>
-      <div class="photo-overlay"><span>Caister Festival</span></div>
-    </div>
+    <div class="photo-item">
+      <img src="../images/gallery/503504208_122233615526064490_4193752580131806327_n.jpg" alt="Caister Festival" loading="lazy"/>    </div>
 
-    <div class="photo-item" onclick="openLightbox(6)">
-      <img src="../images/gallery/509414512_122235156746064490_6464945375050841177_n.jpg" alt="Caister Festival" loading="lazy"/>
-      <div class="photo-overlay"><span>Caister Festival</span></div>
-    </div>
+    <div class="photo-item">
+      <img src="../images/gallery/509414512_122235156746064490_6464945375050841177_n.jpg" alt="Caister Festival" loading="lazy"/>    </div>
 
-    <div class="photo-item" onclick="openLightbox(7)">
-      <img src="../images/gallery/513487631_122236849184064490_458664742773718358_n.jpg" alt="Caister Festival" loading="lazy"/>
-      <div class="photo-overlay"><span>Caister Festival</span></div>
-    </div>
+    <div class="photo-item">
+      <img src="../images/gallery/513487631_122236849184064490_458664742773718358_n.jpg" alt="Caister Festival" loading="lazy"/>    </div>
 
-    <div class="photo-item" onclick="openLightbox(8)">
-      <img src="../images/gallery/504379474_122236849220064490_6494491227083054651_n.jpg" alt="Caister Festival" loading="lazy"/>
-      <div class="photo-overlay"><span>Caister Festival</span></div>
-    </div>
+    <div class="photo-item">
+      <img src="../images/gallery/504379474_122236849220064490_6494491227083054651_n.jpg" alt="Caister Festival" loading="lazy"/>    </div>
 
-    <div class="photo-item" onclick="openLightbox(9)">
-      <img src="../images/gallery/514346905_122236849154064490_841714973047173658_n.jpg" alt="Caister Festival" loading="lazy"/>
-      <div class="photo-overlay"><span>Caister Festival</span></div>
-    </div>
+    <div class="photo-item">
+      <img src="../images/gallery/514346905_122236849154064490_841714973047173658_n.jpg" alt="Caister Festival" loading="lazy"/>    </div>
 
-    <div class="photo-item" onclick="openLightbox(10)">
-      <img src="../images/gallery/514343637_122236848896064490_6436896243094047254_n.jpg" alt="Caister Festival" loading="lazy"/>
-      <div class="photo-overlay"><span>Caister Festival</span></div>
-    </div>
+    <div class="photo-item">
+      <img src="../images/gallery/514343637_122236848896064490_6436896243094047254_n.jpg" alt="Caister Festival" loading="lazy"/>    </div>
 
-    <div class="photo-item" onclick="openLightbox(11)">
-      <img src="../images/gallery/592335842_122258841122064490_5293867177934791934_n.jpg" alt="Caister Festival" loading="lazy"/>
-      <div class="photo-overlay"><span>Caister Festival</span></div>
-    </div>
+    <div class="photo-item">
+      <img src="../images/gallery/592335842_122258841122064490_5293867177934791934_n.jpg" alt="Caister Festival" loading="lazy"/>    </div>
 
   </div>
 
@@ -316,19 +194,6 @@
   <div class="gallery-cta">
     <p>Got photos from a previous Caister Festival? We'd love to feature them here — get in touch and share your memories with the community!</p>
     <a href="/contact/" class="btn btn-coral">Share Your Photos →</a>
-  </div>
-
-  <!-- Lightbox backdrop (click to close) -->
-  <div class="lightbox-backdrop" id="lightboxBackdrop" onclick="closeLightbox()"></div>
-  <!-- Lightbox inner (click does NOT close) -->
-  <div class="lightbox-inner" id="lightboxInner">
-    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-    <img id="lightboxImg" src="" alt="Festival photo"/>
-    <div class="lightbox-nav">
-      <button onclick="prevPhoto()">← Prev</button>
-      <button onclick="nextPhoto()">Next →</button>
-    </div>
-    <div class="lightbox-counter" id="lightboxCounter"></div>
   </div>
 
   <footer>
@@ -340,57 +205,6 @@
 </div>
 
 <script src="../main.js"></script>
-<script>
-  const photos = [
-    "../images/gallery/473615908_122207614982064490_4061428188698849632_n.jpg",
-    "../images/gallery/475755187_122210212646064490_6224620980363574261_n.jpg",
-    "../images/gallery/475576319_122210223926064490_6567692477529459892_n.jpg",
-    "../images/gallery/503838293_122233011230064490_4855710934002158258_n.jpg",
-    "../images/gallery/505250895_122233615442064490_8747018229966735594_n.jpg",
-    "../images/gallery/503504208_122233615526064490_4193752580131806327_n.jpg",
-    "../images/gallery/509414512_122235156746064490_6464945375050841177_n.jpg",
-    "../images/gallery/513487631_122236849184064490_458664742773718358_n.jpg",
-    "../images/gallery/504379474_122236849220064490_6494491227083054651_n.jpg",
-    "../images/gallery/514346905_122236849154064490_841714973047173658_n.jpg",
-    "../images/gallery/514343637_122236848896064490_6436896243094047254_n.jpg",
-    "../images/gallery/592335842_122258841122064490_5293867177934791934_n.jpg",
-  ];
 
-  let current = 0;
-
-  function openLightbox(index) {
-    current = index;
-    updateLightbox();
-    document.getElementById('lightboxBackdrop').classList.add('open');
-    document.getElementById('lightboxInner').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLightbox() {
-    document.getElementById('lightboxBackdrop').classList.remove('open');
-    document.getElementById('lightboxInner').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function closeLightboxOutside(e) {
-    if (e.target === document.getElementById('lightbox')) closeLightbox();
-  }
-
-  function updateLightbox() {
-    document.getElementById('lightboxImg').src = photos[current];
-    document.getElementById('lightboxCounter').textContent = (current + 1) + ' / ' + photos.length;
-  }
-
-  function nextPhoto() { current = (current + 1) % photos.length; updateLightbox(); }
-  function prevPhoto() { current = (current - 1 + photos.length) % photos.length; updateLightbox(); }
-
-  // Keyboard navigation
-  document.addEventListener('keydown', function(e) {
-    if (!document.getElementById('lightboxBackdrop').classList.contains('open')) return;
-    if (e.key === 'ArrowRight') nextPhoto();
-    if (e.key === 'ArrowLeft') prevPhoto();
-    if (e.key === 'Escape') closeLightbox();
-  });
-</script>
 </body>
 </html>
