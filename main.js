@@ -38,10 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
   ---------------------------------------------------------- */
   const nav = document.querySelector('nav');
   if (nav) {
+    let ticking = false;
     window.addEventListener('scroll', () => {
-      nav.style.boxShadow = window.scrollY > 10
-        ? '0 4px 24px rgba(58,127,191,0.35)'
-        : '0 4px 20px rgba(58,127,191,0.25)';
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          nav.classList.toggle('scrolled', window.scrollY > 10);
+          ticking = false;
+        });
+        ticking = true;
+      }
     }, { passive: true });
   }
 
