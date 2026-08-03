@@ -396,20 +396,24 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(58,127,191,0.35); }
 .sslot {
   background: rgba(255,255,255,0.8);
   border: 2px dashed rgba(58,127,191,0.22);
-  border-radius: 12px; height: 75px;
+  border-radius: 12px; height: 120px;
   display: flex; align-items: center; justify-content: center;
   color: #ccc; font-size: .75rem; font-style: italic; font-weight: 600;
 }
 .sslot-logo {
   background: rgba(255,255,255,0.9);
   border: 2px solid rgba(58,127,191,0.15);
-  border-radius: 12px; height: 75px;
-  display: flex; align-items: center; justify-content: center;
-  padding: .6rem; box-shadow: 0 4px 14px rgba(58,127,191,0.08);
+  border-radius: 12px; min-height: 120px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: .4rem; padding: .8rem; box-shadow: 0 4px 14px rgba(58,127,191,0.08);
   transition: transform .15s ease, box-shadow .15s ease;
 }
+.sslot-logo img { max-width: 100%; max-height: 90px; object-fit: contain; }
 .sslot-logo:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(58,127,191,0.14); }
-.sslot-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.sslot-name {
+  font-family: 'Poppins', sans-serif; font-weight: 700;
+  font-size: .78rem; color: var(--navy); text-align: center;
+}
 /* Poppins bold for sponsors subhead */
 .sponsors-subhead { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--navy); margin-bottom: .4rem; }
 .sponsors-note    { color: #888; font-style: italic; font-size: .85rem; margin-bottom: 1rem; font-weight: 500; }
@@ -551,17 +555,8 @@ footer {
 .sec-wrap { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1rem; }
 
 /* ============================================================
-   SCROLL REVEAL ANIMATION
+   (scroll-reveal animation removed — content now shows immediately)
    ============================================================ */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity .55s ease, transform .55s ease;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 /* ============================================================
    RESPONSIVE — MOBILE FIRST
