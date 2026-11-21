@@ -1,4 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Titan+One&family=Poppins:wght@400;500;600;700;800;900&display=swap');
+/* ============================================================
+   CAISTER FESTIVAL — styles.css
+   One stylesheet for the whole site. Sections are labelled below
+   in roughly the order they appear on the pages.
+   Fonts are loaded in each page's <head> (faster than @import).
+   ============================================================ */
 
 /* ============================================================
    VARIABLES
@@ -47,16 +52,25 @@ h1,
    ============================================================ */
 
 
+.page-wrapper {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Fixed decorative background behind every page.
+   The artwork is a shared SVG file so the browser downloads it once
+   and caches it, instead of every page carrying its own copy. */
 .bg-canvas {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  background: var(--sand) url('/images/background.svg') center / cover no-repeat;
 }
-.bg-canvas svg {
-  width: 100%; height: 100%;
-  position: absolute; inset: 0;
-}
+/* Gallery page uses a lighter version so the photos stand out */
+.bg-canvas.bg-light { background-image: url('/images/background-light.svg'); }
+
+/* Everything except the background sits on top of it */
 .page-wrapper > *:not(.bg-canvas) {
   position: relative;
   z-index: 1;
@@ -77,11 +91,6 @@ nav {
   flex-direction: column;
 }
 nav.scrolled { box-shadow: 0 4px 24px rgba(58,127,191,0.35); }
-
-.page-wrapper {
-  position: relative;
-  min-height: 100vh;
-}
 
 /* Logo row */
 .nav-logo {
@@ -156,15 +165,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(58,127,191,0.35); }
   font-weight: 700; padding: .55rem 2rem;
   border-radius: 50px; letter-spacing: .05em;
   box-shadow: 0 6px 18px rgba(58,127,191,0.3);
-}
-.date-pill-2027 {
-  display: inline-block;
-  background: var(--seafoam); color: var(--white);
-  font-size: clamp(.72rem, 2vw, .85rem);
-  font-weight: 700; padding: .4rem 1.4rem;
-  border-radius: 50px; letter-spacing: .04em;
-  margin-top: .5rem;
-  box-shadow: 0 4px 14px rgba(78,205,196,0.3);
 }
 .hero-sub {
   margin-top: .7rem;
@@ -285,6 +285,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(58,127,191,0.35); }
 
 /* ============================================================
    LINEUP TABLE
+   Not used yet — kept ready for when the line-up is announced.
    ============================================================ */
 .ltable {
   width: 100%; border-collapse: collapse;
@@ -387,7 +388,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(58,127,191,0.35); }
 .t-gold   .tier-hd { background: linear-gradient(135deg, #d97706, #fbbf24); color: white; }
 .t-silver .tier-hd { background: linear-gradient(135deg, #6b7280, #d1d5db); color: white; }
 .t-bronze .tier-hd { background: linear-gradient(135deg, #92400e, #d97706); color: white; }
-.t-friend .tier-hd { background: linear-gradient(135deg, var(--seafoam), #0d9488); color: white; }
 
 .spon-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -416,10 +416,119 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(58,127,191,0.35); }
 }
 /* Poppins bold for sponsors subhead */
 .sponsors-subhead { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--navy); margin-bottom: .4rem; }
-.sponsors-note    { color: #888; font-style: italic; font-size: .85rem; margin-bottom: 1rem; font-weight: 500; }
+
+/* ------------------------------------------------------------
+   SPONSOR LEVELS — one block per package, biggest first
+   ------------------------------------------------------------ */
+.spon-level { margin-top: 2rem; }
+.spon-level:first-of-type { margin-top: 1.2rem; }
+.spon-level-hd {
+  display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
+  border-bottom: 2px solid rgba(58,127,191,0.12);
+  padding-bottom: .4rem;
+}
+.spon-level-hd .sponsors-subhead { margin-bottom: 0; }
+
+/* Grid sizes: bigger packages get bigger logos */
+.spon-grid-lg { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.spon-grid-lg .sslot, .spon-grid-lg .sslot-logo { min-height: 150px; }
+
+/* "Your logo here" slots that link to the contact page */
+a.sslot { text-decoration: none; text-align: center; padding: .8rem; transition: border-color .2s, color .2s; }
+a.sslot:hover { border-color: var(--coral); color: var(--coral); }
+
+/* ------------------------------------------------------------
+   HEADLINE SPONSOR FEATURE (Sponsors page)
+   Logo on the left, profile on the right; stacks on phones.
+   ------------------------------------------------------------ */
+.headline-feature {
+  --hl-brand: #1d3245;                      /* AJ Trade Plastics navy */
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);   /* minmax stops long text pushing the card wider */
+  margin-top: 1rem;
+  border-radius: 20px; overflow: hidden;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 10px 34px rgba(29,50,69,0.18);
+  border: 3px solid var(--hl-brand);
+}
+.headline-logo {
+  background: var(--hl-brand);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.2rem;
+}
+.headline-logo img { width: 100%; max-width: 210px; height: auto; }
+.headline-body { padding: 1.5rem 1.6rem; }
+.headline-body h3 {
+  font-family: 'Titan One', cursive; font-weight: 400;
+  color: var(--hl-brand); font-size: clamp(1.4rem, 4vw, 1.9rem); line-height: 1.15;
+  margin: .4rem 0 .8rem;
+}
+.headline-body p { color: #444; font-size: .9rem; line-height: 1.75; font-weight: 500; margin-bottom: .8rem; }
+.headline-body .btn { margin-top: .4rem; white-space: normal; text-align: center; }
+.btn-facebook { background: #1877F2; color: var(--white); }
+
+/* Small coloured labels: "Headline Sponsor", "Sold out", "Only a few left" */
+.tag {
+  display: inline-block;
+  font-size: .68rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+  padding: .22rem .7rem; border-radius: 20px;
+  background: var(--coral); color: var(--white);
+}
+.tag-gold    { background: linear-gradient(135deg, #d97706, #fbbf24); }
+.tag-soldout { background: #6b7280; }
+.tag-few     { background: var(--coral); }
+
+/* Package cards: sold-out state + badge in the header */
+.tier-hd .tag { margin-left: auto; background: rgba(255,255,255,0.95); color: var(--black); }
+.tier-hd .tag-few { color: var(--coral); }
+.tier-card.sold-out { opacity: .75; }
+.tier-card.sold-out .tier-hd { filter: grayscale(.6); }
+.tier-card.sold-out .tier-price s { color: #999; text-decoration-thickness: 3px; }
+.tier-card.sold-out .tier-price small {
+  display: block; font-family: 'Poppins', sans-serif; font-weight: 700;
+  font-size: .8rem; color: #777;
+}
+
+@media (max-width: 640px) {
+  .headline-feature { grid-template-columns: minmax(0, 1fr); }
+  .headline-logo { padding: 1rem; }
+  .headline-logo img { max-width: 170px; }
+  .headline-body { padding: 1.2rem 1.1rem; }
+}
+
+/* ------------------------------------------------------------
+   HOMEPAGE "PROUDLY SPONSORED BY" BAND
+   ------------------------------------------------------------ */
+.headline-band {
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
+  max-width: 560px; margin: -1.5rem auto 0;
+  padding: .8rem 1.4rem .8rem .8rem;
+  background: rgba(255,255,255,0.95);
+  border-radius: 22px;
+  box-shadow: 0 8px 28px rgba(29,50,69,0.16);
+  text-decoration: none;
+  transition: transform .15s, box-shadow .15s;
+}
+.headline-band:hover { transform: translateY(-3px); box-shadow: 0 12px 34px rgba(29,50,69,0.22); }
+.headline-band img { width: 96px; height: 96px; border-radius: 14px; flex-shrink: 0; }
+.headline-band-text { text-align: left; line-height: 1.3; }
+.headline-band-text small {
+  display: block; font-size: .72rem; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--coral);
+}
+.headline-band-text strong {
+  display: block; font-family: 'Titan One', cursive; font-weight: 400;
+  font-size: clamp(1.15rem, 4vw, 1.5rem); color: #1d3245;
+}
+.headline-band-text span { font-size: .8rem; color: var(--navy); font-weight: 600; }
+@media (max-width: 480px) {
+  .headline-band { margin: -1rem 1rem 0; gap: .8rem; }
+  .headline-band img { width: 72px; height: 72px; }
+}
 
 /* ============================================================
    VOLUNTEER
+   (.roles-grid / .rcard / .vol-cta not used yet — kept for role listings)
    ============================================================ */
 .roles-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -553,10 +662,6 @@ footer {
    LAYOUT HELPERS
    ============================================================ */
 .sec-wrap { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1rem; }
-
-/* ============================================================
-   (scroll-reveal animation removed — content now shows immediately)
-   ============================================================ */
 
 /* ============================================================
    RESPONSIVE — MOBILE FIRST
