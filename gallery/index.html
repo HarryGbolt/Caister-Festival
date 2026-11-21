@@ -48,7 +48,10 @@
     margin: 0 auto;
     padding: 0 1rem 2rem;
   }
-  @media (max-width: 768px) { .photo-grid { columns: 2; column-gap: 10px; } }
+  @media (max-width: 768px) {
+    .photo-grid { columns: 2; column-gap: 10px; }
+    .gallery-hero { padding-top: 4.5rem; }  /* room under the bunting */
+  }
   @media (max-width: 480px) { .photo-grid { columns: 1; } }
 
   .photo-item {
@@ -90,15 +93,17 @@
 <body>
 <div class="page-wrapper">
 
-  <!-- Decorative background – artwork lives in /images/background-light.svg -->
-  <div class="bg-canvas bg-light" aria-hidden="true"></div>
+  <!-- Decorative background: sky, clouds and bunting (styled in styles.css → DECORATIVE BACKGROUND) -->
+  <div class="bg-canvas" aria-hidden="true"></div>
   <!-- ===== NAVIGATION =====
          This menu is copied on every page. If you add or rename a page,
          update it in ALL 8 pages. (main.js highlights the current page.) -->
   <nav>
     <a class="nav-logo" href="/">🌅 Caister Festival</a>
+    <!-- Menu button: only shown on phones (opens/closes the link list) -->
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links"><span class="nav-toggle-icon" aria-hidden="true"></span>Menu</button>
     <div class="nav-links-wrap">
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="/lineup/">Line-Up</a></li>
         <li><a href="/stalls/">Stalls</a></li>

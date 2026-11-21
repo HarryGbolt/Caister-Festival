@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="48" viewBox="0 0 400 48" preserveAspectRatio="none">
+  <!-- Waves that lead into the footer (tiles left-to-right) -->
+  <path d="M0,22 C50,6 150,6 200,22 C250,38 350,38 400,22 V48 H0Z" fill="#4ECDC4" opacity=".55"/>
+  <path d="M0,30 C50,44 150,44 200,30 C250,16 350,16 400,30 V48 H0Z" fill="#3A7FBF"/>
+</svg>

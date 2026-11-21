@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="90" viewBox="0 0 360 90" opacity=".45">
+  <!-- Fainter second row of bunting (tiles left-to-right) -->
+  <path d="M0,8 Q180,100 360,8" stroke="#3A7FBF" stroke-opacity=".45" stroke-width="1.5" fill="none"/>
+  <polygon points="11.5,13.7 33.5,23.5 22.5,46.8" fill="#FF6B6B"/>
+  <polygon points="56.5,32.3 78.5,39.4 67.5,64.0" fill="#FFB347"/>
+  <polygon points="101.5,45.3 123.5,49.5 112.5,75.5" fill="#4ECDC4"/>
+  <polygon points="146.5,52.4 168.5,53.8 157.5,81.3" fill="#5BBCDD"/>
+  <polygon points="191.5,53.8 213.5,52.4 202.5,81.3" fill="#C084FC"/>
+  <polygon points="236.5,49.5 258.5,45.3 247.5,75.5" fill="#FF6B6B"/>
+  <polygon points="281.5,39.4 303.5,32.3 292.5,64.0" fill="#FFB347"/>
+  <polygon points="326.5,23.5 348.5,13.7 337.5,46.8" fill="#4ECDC4"/>
+</svg>

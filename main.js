@@ -25,7 +25,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ----------------------------------------------------------
-     2. ACTIVE NAV LINK — highlight current page
+     2. PHONE MENU — "Menu" button opens/closes the link list
+  ---------------------------------------------------------- */
+  const toggle = document.querySelector('.nav-toggle');
+  if (nav && toggle) {
+    const setOpen = (open) => {
+      nav.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open);   // tells screen readers if it's open
+    };
+    toggle.addEventListener('click', () => setOpen(!nav.classList.contains('open')));
+    // Close it with the Escape key or by tapping anywhere outside the menu
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+    document.addEventListener('click', e => { if (!nav.contains(e.target)) setOpen(false); });
+  }
+
+  /* ----------------------------------------------------------
+     3. ACTIVE NAV LINK — highlight current page
   ---------------------------------------------------------- */
   // Compare each menu link with the current URL (ignoring trailing slashes)
   // and give the matching one the "active" class.

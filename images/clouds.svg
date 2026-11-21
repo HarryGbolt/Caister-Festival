@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="160" viewBox="0 0 900 160">
+  <!-- Soft clouds (tiles left-to-right) -->
+  <g fill="#fff">
+    <ellipse cx="140" cy="70" rx="110" ry="34" opacity=".6"/>
+    <ellipse cx="200" cy="56" rx="72"  ry="28" opacity=".5"/>
+    <ellipse cx="520" cy="110" rx="95" ry="28" opacity=".45"/>
+    <ellipse cx="770" cy="48" rx="120" ry="36" opacity=".55"/>
+    <ellipse cx="835" cy="36" rx="70"  ry="26" opacity=".45"/>
+  </g>
+</svg>

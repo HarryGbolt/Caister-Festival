@@ -57,19 +57,39 @@ h1,
   min-height: 100vh;
 }
 
-/* Fixed decorative background behind every page.
-   The artwork is a shared SVG file so the browser downloads it once
-   and caches it, instead of every page carrying its own copy. */
+/* ------------------------------------------------------------
+   DECORATIVE BACKGROUND
+   A sky-coloured band at the top of every page with clouds and
+   festival bunting hanging just under the menu. It scrolls away
+   with the page (rather than being stuck to the screen), so it
+   never looks cut off and works smoothly on phones.
+   The bunting/clouds are small repeating tiles, so they fit any
+   screen width without being squashed or stretched.
+   ------------------------------------------------------------ */
+:root { --nav-h: 55px; }                      /* menu bar height on phones (60px on desktop, see bottom) */
+
 .bg-canvas {
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 720px;
   z-index: 0;
   pointer-events: none;
-  background: var(--sand) url('/images/background.svg') center / cover no-repeat;
+  /* Phones: one row of smaller bunting */
+  background:
+    url('/images/bunting.svg') 0 var(--nav-h) / 240px 60px repeat-x,                     /* bunting */
+    url('/images/clouds.svg') 0 calc(var(--nav-h) + 50px) / 600px 107px repeat-x,       /* clouds */
+    linear-gradient(to bottom, #cfeefa 0%, #e6f6fb 45%, rgba(255,248,238,0) 100%);       /* sky fading to sand */
 }
-/* Gallery page uses a lighter version so the photos stand out */
-.bg-canvas.bg-light { background-image: url('/images/background-light.svg'); }
-
+/* Desktop/tablet: full-size bunting plus a fainter second row */
+@media (min-width: 769px) {
+  .bg-canvas {
+    background:
+      url('/images/bunting.svg') 0 var(--nav-h) / 360px 90px repeat-x,
+      url('/images/bunting-faint.svg') 180px calc(var(--nav-h) + 150px) / 300px 75px repeat-x,
+      url('/images/clouds.svg') 0 calc(var(--nav-h) + 30px) / 900px 160px repeat-x,
+      linear-gradient(to bottom, #cfeefa 0%, #e6f6fb 45%, rgba(255,248,238,0) 100%);
+  }
+}
 /* Everything except the background sits on top of it */
 .page-wrapper > *:not(.bg-canvas) {
   position: relative;
@@ -78,6 +98,9 @@ h1,
 
 /* ============================================================
    NAV
+   Phones: festival name + a "Menu" button that opens a list of
+           big, easy-to-tap links (toggled by main.js).
+   Desktop (769px+): every link shown in one row, no button.
    ============================================================ */
 nav {
   background: #2a6399;
@@ -86,63 +109,80 @@ nav {
   z-index: 200;
   box-shadow: 0 4px 20px rgba(58,127,191,0.25);
   transition: box-shadow .2s ease;
-  /* two rows on mobile: logo then links */
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
 }
 nav.scrolled { box-shadow: 0 4px 24px rgba(58,127,191,0.35); }
 
-/* Logo row */
+/* Festival name (links home) */
 .nav-logo {
   font-family: 'Titan One', cursive;
   font-size: 1.1rem; color: var(--white);
   text-decoration: none;
   white-space: nowrap;
-  padding: .7rem 1.2rem .3rem;
+  padding: .85rem 1.1rem;
   display: block;
   text-shadow: 1px 2px 4px rgba(0,0,0,0.2);
 }
 
-/* Links row — horizontally scrollable with fade hint */
-.nav-links-wrap {
-  position: relative;
-  width: 100%;
+/* "Menu" button — phones only */
+.nav-toggle {
+  display: inline-flex; align-items: center; gap: .55rem;
+  margin-right: .8rem;
+  min-height: 40px; padding: .45rem .95rem;
+  background: rgba(255,255,255,0.16); color: var(--white);
+  border: none; border-radius: 22px; cursor: pointer;
+  font-family: 'Poppins', sans-serif; font-weight: 700; font-size: .85rem;
 }
-/* fade on right edge to hint scrollability */
-.nav-links-wrap::after {
-  content: '';
-  position: absolute;
-  top: 0; right: 0; bottom: 0;
-  width: 36px;
-  background: linear-gradient(to right, transparent, #2a6399);
-  pointer-events: none;
-  z-index: 2;
+.nav-toggle:focus-visible { outline: 3px solid var(--peach); outline-offset: 2px; }
+/* three-line "hamburger" icon, turns into an X when open */
+.nav-toggle-icon,
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+  display: block; width: 18px; height: 2px; border-radius: 2px;
+  background: currentColor; transition: transform .2s, opacity .2s;
 }
+.nav-toggle-icon { position: relative; }
+.nav-toggle-icon::before,
+.nav-toggle-icon::after { content: ''; position: absolute; left: 0; }
+.nav-toggle-icon::before { top: -6px; }
+.nav-toggle-icon::after  { top:  6px; }
+nav.open .nav-toggle-icon { background: transparent; }
+nav.open .nav-toggle-icon::before { transform: translateY(6px) rotate(45deg); }
+nav.open .nav-toggle-icon::after  { transform: translateY(-6px) rotate(-45deg); }
+
+/* Link list — hidden on phones until the menu is opened */
+.nav-links-wrap { display: none; width: 100%; }
+nav.open .nav-links-wrap { display: block; }
 .nav-links {
-  display: flex;
   list-style: none;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding: 0 .6rem .55rem;
-  gap: .25rem;
-  width: 100%;
+  display: flex; flex-direction: column; gap: .2rem;
+  padding: .2rem .8rem 1rem;
 }
-.nav-links::-webkit-scrollbar { display: none; }
-.nav-links li { flex-shrink: 0; }
 .nav-links li a {
   display: block;
-  white-space: nowrap;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.92);
   text-decoration: none;
-  font-size: .78rem; font-weight: 700;
-  padding: .38rem .85rem;
-  border-radius: 20px;
+  font-size: 1rem; font-weight: 700;
+  padding: .7rem 1rem;              /* tall rows = easy to tap */
+  border-radius: 12px;
   transition: background .2s, color .2s;
   letter-spacing: .03em;
 }
 .nav-links li a:hover,
 .nav-links li a.active { background: var(--coral); color: var(--white); }
+
+/* Desktop: single row, no menu button */
+@media (min-width: 769px) {
+  nav { flex-wrap: nowrap; padding: 0 1.5rem; height: 60px; justify-content: flex-start; }
+  .nav-logo { padding: 0 1rem 0 0; flex-shrink: 0; }
+  .nav-toggle { display: none; }
+  .nav-links-wrap { display: block; width: auto; flex: 1; }
+  .nav-links { flex-direction: row; flex-wrap: wrap; gap: .1rem; padding: 0; }
+  .nav-links li a { font-size: .78rem; padding: .38rem .85rem; border-radius: 20px; white-space: nowrap; }
+}
 
 /* ============================================================
    HERO
@@ -652,7 +692,13 @@ a.sslot:hover { border-color: var(--coral); color: var(--coral); }
 footer {
   background: var(--navy); color: rgba(255,255,255,0.75);
   text-align: center; padding: 2.5rem 1.5rem;
-  font-size: .82rem; letter-spacing: .03em; margin-top: 2rem;
+  font-size: .82rem; letter-spacing: .03em; margin-top: 4rem;
+}
+/* Waves rolling into the footer (repeating tile, fits any width) */
+footer::before {
+  content: '';
+  position: absolute; left: 0; right: 0; top: -47px; height: 48px;
+  background: url('/images/waves.svg') 0 0 / 400px 48px repeat-x;
 }
 .flogo { font-family: 'Titan One', cursive; color: var(--white); font-size: 1.3rem; margin-bottom: .4rem; }
 .footer-sub  { margin-top: .35rem; opacity: .8; }
@@ -669,7 +715,7 @@ footer {
 
 /* Small phones */
 @media (max-width: 480px) {
-  .hero { padding: 3rem 1rem 3.5rem; }
+  .hero { padding: 5rem 1rem 3.5rem; }
   .hero h1 { font-size: clamp(2.8rem, 16vw, 4rem); }
   .panel { padding: 1.5rem 1rem; border-radius: 18px; }
   .card-grid { grid-template-columns: repeat(2, 1fr); }
@@ -681,12 +727,17 @@ footer {
   .ltable td:last-child { display: none; } /* hide stage col on tiny screens */
   .btn { padding: .65rem 1.4rem; font-size: .85rem; }
   .date-pill { padding: .5rem 1.4rem; }
-  .press-mention { font-size: .75rem; padding: .5rem 1.1rem; text-align: center; }
+  .press-mention { display: block; font-size: .75rem; padding: .6rem 1.1rem; text-align: center; border-radius: 18px; }
+  .press-mention a { display: block; padding: .3rem 0; }  /* bigger tap area */
+  /* Long button labels wrap instead of pushing the page sideways */
+  .btn { white-space: normal; max-width: 100%; text-align: center; }
 }
 
 /* Tablets */
 @media (max-width: 768px) {
-  .sec-wrap { padding: 2rem .75rem; }
+  .sec-wrap { padding: 4.2rem .75rem 2rem; }   /* top space so content starts below the bunting */
+  .hero { padding-top: 5rem; }
+  .hero + .headline-band + .sec-wrap { padding-top: 2.5rem; } /* homepage: no bunting gap needed here */
   .panel { border-radius: 18px; padding: 1.6rem 1.1rem; }
   .card-grid { grid-template-columns: repeat(2, 1fr); gap: .9rem; }
   .hero-btns { flex-direction: column; align-items: center; }
@@ -699,27 +750,7 @@ footer {
 
 /* Desktop */
 @media (min-width: 769px) {
+  :root { --nav-h: 60px; }
   .panel { padding: 2.5rem 2rem; }
   .sec-wrap { padding: 3rem 2rem; }
-
-  /* Single row on desktop */
-  nav {
-    flex-direction: row;
-    align-items: center;
-    padding: 0 1.5rem;
-    height: 60px;
-  }
-  .nav-logo {
-    padding: 0 1rem 0 0;
-    flex-shrink: 0;
-  }
-  .nav-links-wrap { width: auto; flex: 1; }
-  .nav-links-wrap::after { display: none; } /* no fade needed on desktop */
-  .nav-links {
-    padding: 0;
-    overflow-x: visible;
-    flex-wrap: wrap;
-    gap: .1rem;
-  }
-  .nav-links li { flex-shrink: initial; }
 }
